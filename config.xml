@@ -4,7 +4,7 @@
 	id		= "org.alaimo.getting_started"
 	version 	= "0.0.1">
 
-	<name>My First Hello World</name>
+	<name>My First App</name>
 
 	<description>
 		Simple my first app, nothing special.
@@ -18,6 +18,7 @@
 	<icon src="icon.png" gap:role="default" />
 
 	<feature name="http://api.phonegap.com/1.0/network"/>
+	<feature name="http://api.phonegap.com/1.0/camera"/>
 
 	<preference name="orientation" value="portrait" />
 </widget>
