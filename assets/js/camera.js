@@ -34,7 +34,7 @@ function onDeviceReady() {
 function onPhotoDataSuccess(imageData) {
     console.log("* * * onPhotoDataSuccess");
     var cameraImage = document.getElementById('cameraImage');
-    cameraImage.style.display = 'block';
+    cameraImage.style.visibility = 'visible';
     cameraImage.src = "data:image/jpeg;base64," + imageData;
 }
 
