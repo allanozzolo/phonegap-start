@@ -22,11 +22,19 @@ var pictureSource;   // picture source
 var destinationType; // sets the format of returned value 
 // See the above in device.js for their assignments
 
+document.addEventListener("deviceready", onDeviceReady, false);
+
+
+function onDeviceReady() {
+	pictureSource = navigator.camera.PictureSourceType;
+	destinationType = navigator.camera.DestinationType;
+}
+
 // api-camera
 function onPhotoDataSuccess(imageData) {
     console.log("* * * onPhotoDataSuccess");
     var cameraImage = document.getElementById('cameraImage');
-    cameraImage.style.visibility = 'visible';
+    cameraImage.style.display = 'block';
     cameraImage.src = "data:image/jpeg;base64," + imageData;
 }
 
@@ -39,16 +47,19 @@ function onPhotoURISuccess(imageURI) {
     cameraImage.src = imageURI;
 }
 
+function onPhotoDataFail(){
+    alert("Camera Error!");
+}
+
+
 function take_pic() {
-    navigator.camera.getPicture(onPhotoDataSuccess, function(ex) {
-        alert("Camera Error!");
-    }, { quality : 30, destinationType: destinationType.DATA_URL });
+    navigator.camera.getPicture(onPhotoDataSuccess, onPhotoDataFail,
+    { quality : 50, destinationType: destinationType.DATA_URL });
 }
 
 function album_pic() { 
-    navigator.camera.getPicture(onPhotoURISuccess, function(ex) {
-            alert("Camera Error!"); }, 
-            { quality: 30, 
+    navigator.camera.getPicture(onPhotoURISuccess, onPhotoDataFail, 
+            { quality: 50, 
         destinationType: destinationType.FILE_URI,
         // Android Quirk: Camera.PictureSourceType.PHOTOLIBRARY and 
         // Camera.PictureSourceType.SAVEDPHOTOALBUM display the same photo album.
